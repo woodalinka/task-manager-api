@@ -70,14 +70,11 @@ router.patch('/users/me', auth, async (req, res) => {
     }
 
     try {
-        // const user = await User.findById(req.user._id)
-
         updates.forEach((update) => {
             req.user[update] = req.body[update]
         })
-
         await req.user.save()
-        res.send(user)
+        res.send(req.user.body)
     } catch (e) {
         res.status(400).send(e)
     }
